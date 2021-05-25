@@ -11,6 +11,7 @@ const updateUI = (data) => {
 
   //destructure properties
   //The constants must be the same name as the properties we're getting from the object
+  //This will create two constants with the same name as the relevant properties in "data" and set their value as the value of those properies in "data".
   const { cityDetails, weather } = data;
 
   //update details html template
