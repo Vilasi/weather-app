@@ -65,4 +65,17 @@ cityForm.addEventListener('submit', (e) => {
   updateCity(city)
     .then((data) => updateUI(data))
     .catch((err) => console.log(err));
+
+  //set localStorage to user's input value on submit event
+  localStorage.setItem('userInput', city);
 });
+
+//Check if the user had a location stored before page reload/close.
+//If true, send a request to the Accuweather API
+window.onload = (event) => {
+  if (localStorage.userInput) {
+    updateCity(localStorage.userInput)
+      .then((data) => updateUI(data))
+      .catch((err) => console.log(err));
+  }
+};
