@@ -2,17 +2,17 @@
 const cityForm = document.querySelector('form');
 const card = document.querySelector('.card');
 const details = document.querySelector('.details');
+const time = document.querySelector('img.time');
+const icon = document.querySelector('.icon img');
 
 //Update the DOM with data fetched from Accuweather API
 const updateUI = (data) => {
-  //The below two lines of code can be accomplished mroe succinctly using destructuring
-  //   const cityDetails = data.cityDetails;
-  //   const weather = data.weather;
-
   //destructure properties
   //The constants must be the same name as the properties we're getting from the object
   //This will create two constants with the same name as the relevant properties in "data" and set their value as the value of those properies in "data".
   const { cityDetails, weather } = data;
+
+  console.log(weather);
 
   //update details html template
   details.innerHTML = `<div class="text-muted text-uppercase text-center details">
@@ -24,6 +24,16 @@ const updateUI = (data) => {
           <span>&deg;${weather[0].Temperature.Imperial.Unit}</span>
         </div>
       </div>`;
+
+  //Show Weather Icon in DOM
+  const iconNum = weather[0].WeatherIcon;
+  icon.src = `img/icons/${iconNum}.svg`;
+
+  //Show time of day SVG using Ternary Operator
+
+  weather[0].IsDayTime
+    ? (time.src = 'img/day.svg')
+    : (time.src = 'img/night.svg');
 
   //Remove div.card class "d-none" if it is present.
   if (Array.from(card.classList).includes('d-none')) {
